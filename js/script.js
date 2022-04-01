@@ -6,6 +6,8 @@ function computerPlay() {
   return computerChoice;
 }
 
+/*
+//Check and print i repetitions of computerPlay
 let rock = 0;
 let paper = 0;
 let scissors = 0;
@@ -25,4 +27,4 @@ for (let i = 0; i < 10000; i++) {
   }
 }
 
-console.log(rock, paper, scissors);
+console.log(rock, paper, scissors);*/
