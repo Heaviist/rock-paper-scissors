@@ -41,22 +41,26 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
   let points = 0;
-  const rounds = 5;
-  if (confirm(`This game of Rock Paper Scissors consists of 5 rounds. Choose "OK" if you want to use the same choice for all ${rounds} rounds. Choose "No" if you want to make a new choice for every round.`)) {
-    for (let i = 0; i < rounds; i++) {
-      let playerResult = playRound(playerInput(), computerPlay()); //playerChoice will be the same for the whole round, computerplay will be generated every round
-      points = points + playerResult;
+  const rounds = +prompt('How many rounds do you want to play? (Enter an integer)', '5');
+  if (Number.isInteger(rounds)) {
+    if (confirm(`This game of Rock Paper Scissors consists of ${rounds} rounds. Choose "OK" if you want to use the same choice for all ${rounds} rounds. Choose "No" if you want to make a new choice for every round.`)) {
+      for (let i = 0; i < rounds; i++) {
+        let playerResult = playRound(playerInput(), computerPlay()); //playerChoice will be the same for the whole round, computerplay will be generated every round
+        points = points + playerResult;
+      }
+    } else {
+      let choice = playerInput();
+      for (let i = 0; i < rounds; i++) {
+        let playerResult = playRound(choice, computerPlay()); //playerChoice will be the same for the whole round, computerplay will be generated every round
+        points = points + playerResult;
+      }
     }
+    alert(`You scored ${points / 2} points, computer scored ${(rounds * 2 - points) / 2}!`)
   } else {
-    let choice = playerInput();
-    for (let i = 0; i < rounds; i++) {
-      let playerResult = playRound(choice, computerPlay()); //playerChoice will be the same for the whole round, computerplay will be generated every round
-      points = points + playerResult;
-    }
+    alert(`That's not an integer. Please enter an integer (a positive whole number)`);
+    game();
   }
-  alert(`You scored ${points / 2} points, computer scored ${(10 - points) / 2}!`)
 }
-
 /*
 
 //Check and print i repetitions of computerPlay
