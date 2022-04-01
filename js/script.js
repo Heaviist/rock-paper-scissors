@@ -8,21 +8,33 @@ function computerPlay() {
 }
 
 const playerChoice = prompt('Choose "Rock", "Paper" or "Scissors"').toLowerCase();
-const computerChoice = computerPlay();
-playRound(playerChoice, computerChoice);
+game();
+// const computerChoice = computerPlay(); generated every time when playing multiple rounds
+// playRound(playerChoice, computerChoice); will be invoked from game() for multiple rounds
 
 function playRound(playerSelection, computerSelection) {
   const gameContent = `${playerSelection}${computerSelection}`;
-  const optionSet = new Set(["rockscissors","paperrock","scissorspaper"]);
+  const optionSet = new Set(["rockscissors", "paperrock", "scissorspaper"]);
   if (playerSelection === computerSelection) {
     alert(`Tie! You both chose ${playerSelection}...`);
+    return 1;
   } else if (optionSet.has(gameContent)) {
-    alert(`Computer chose ${computerSelection}. You win!`);
+    alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+    return 2;
   } else {
-    alert(`Computer chose ${computerSelection}. You lose!`);
+    alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+    return 0;
   }
 }
 
+function game() {
+  let points = 0;
+  for (let i = 0; i < 5; i++) {
+    let playerResult = playRound(playerChoice, computerPlay()); //playerChoice will be the same for the whole round, computerplay will be generated every round
+    points = points + playerResult;
+  }
+  alert(`You scored ${points / 2} points, computer scored ${(10 - points) / 2}!`)
+}
 
 /*
 
