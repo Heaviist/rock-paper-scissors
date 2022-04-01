@@ -7,7 +7,19 @@ function computerPlay() {
   // return computerResult; //Uncomment to run check section
 }
 
-const playerChoice = prompt('Choose "Rock", "Paper" or "Scissors"').toLowerCase();
+function playerInput() {
+  let choice = ''
+  choice = prompt('Type "Rock", "Paper" or "Scissors" to start a game:').toLowerCase();
+  if (choice == "rock" || choice == "paper" || choice == "scissors") {
+    console.log(choice);
+    return choice;
+  } else {
+    alert(`${choice} is invalid input`);
+    return playerInput();
+  }
+}
+
+// const playerChoice = prompt('Choose "Rock", "Paper" or "Scissors"').toLowerCase();
 game();
 // const computerChoice = computerPlay(); generated every time when playing multiple rounds
 // playRound(playerChoice, computerChoice); will be invoked from game() for multiple rounds
@@ -29,9 +41,18 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
   let points = 0;
-  for (let i = 0; i < 5; i++) {
-    let playerResult = playRound(playerChoice, computerPlay()); //playerChoice will be the same for the whole round, computerplay will be generated every round
-    points = points + playerResult;
+  const rounds = 5;
+  if (confirm(`This game of Rock Paper Scissors consists of 5 rounds. Choose "OK" if you want to use the same choice for all ${rounds} rounds. Choose "No" if you want to make a new choice for every round.`)) {
+    for (let i = 0; i < rounds; i++) {
+      let playerResult = playRound(playerInput(), computerPlay()); //playerChoice will be the same for the whole round, computerplay will be generated every round
+      points = points + playerResult;
+    }
+  } else {
+    let choice = playerInput();
+    for (let i = 0; i < rounds; i++) {
+      let playerResult = playRound(choice, computerPlay()); //playerChoice will be the same for the whole round, computerplay will be generated every round
+      points = points + playerResult;
+    }
   }
   alert(`You scored ${points / 2} points, computer scored ${(10 - points) / 2}!`)
 }
