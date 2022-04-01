@@ -41,7 +41,7 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
   let points = 0;
-  const rounds = +prompt('How many rounds do you want to play? (Enter an integer)', '5');
+  const rounds = +prompt('How many rounds do you want to play? (Enter an integer, 5 is recommended)', '5');
   if (Number.isInteger(rounds)) {
     if (confirm(`This game of Rock Paper Scissors consists of ${rounds} rounds. Choose "OK" if you want to use the same choice for all ${rounds} rounds. Choose "No" if you want to make a new choice for every round.`)) {
       for (let i = 0; i < rounds; i++) {
