@@ -1,6 +1,12 @@
 // game(); autostarts game
 
 const buttons = document.querySelectorAll('button'); // select buttons from document
+let pointsPlayer = 0;
+let pointsComputer = 0;
+const rounds = 1;
+const gameResult = document.querySelector('.game-result');
+const score = document.querySelector('.score');
+console.log(score);
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -28,34 +34,19 @@ function computerPlay() {
   // return computerResult; //Uncomment to run check section
 }
 
-function playerInput() {
-  let choice = ''
-  choice = prompt('Type "Rock", "Paper" or "Scissors" to start a game:').toLowerCase();
-  if (choice == "rock" || choice == "paper" || choice == "scissors") {
-    console.log(choice);
-    return choice;
-  } else {
-    alert(`${choice} is invalid input`);
-    return playerInput();
-  }
-}
-
-// const playerChoice = prompt('Choose "Rock", "Paper" or "Scissors"').toLowerCase();
-// const computerChoice = computerPlay(); generated every time when playing multiple rounds
-// playRound(playerChoice, computerChoice); will be invoked from game() for multiple rounds
-
 function playRound(playerSelection, computerSelection) {
   const gameContent = `${playerSelection}${computerSelection}`;
   const optionSet = new Set(["rockscissors", "paperrock", "scissorspaper"]);
   if (playerSelection === computerSelection) {
     alert(`Tie! You both chose ${playerSelection}...`);
-    return 1;
+    pointsPlayer += 1;
+    pointsComputer += 1;
   } else if (optionSet.has(gameContent)) {
     alert(`You win! ${playerSelection} beats ${computerSelection}!`);
-    return 2;
+    pointsPlayer += 2;
   } else {
     alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
-    return 0;
+    pointsComputer += 2;
   }
 }
 
@@ -86,6 +77,25 @@ function game() {
   //    game();
   //  }
 }
+
+/* // obsolete when using UI
+function playerInput() {
+  let choice = ''
+  choice = prompt('Type "Rock", "Paper" or "Scissors" to start a game:').toLowerCase();
+  if (choice == "rock" || choice == "paper" || choice == "scissors") {
+    console.log(choice);
+    return choice;
+  } else {
+    alert(`${choice} is invalid input`);
+    return playerInput();
+  }
+}
+*/
+
+// const playerChoice = prompt('Choose "Rock", "Paper" or "Scissors"').toLowerCase();
+// const computerChoice = computerPlay(); generated every time when playing multiple rounds
+// playRound(playerChoice, computerChoice); will be invoked from game() for multiple rounds
+
 /*
 
 //Check and print i repetitions of computerPlay
