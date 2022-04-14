@@ -6,27 +6,15 @@ let pointsComputer = 0;
 const rounds = 1;
 const gameResult = document.querySelector('.game-result');
 const score = document.querySelector('.score');
-console.log(score);
 
 buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    playRound(playerChoice(button.id), computerPlay()); //run a round when a button is clicked. Listener for each button
+  button.addEventListener('click', function(e) {
+    playRound(e.target.innerHTML, computerPlay()); //run a round when a button is clicked. Listener for each button
   });
 });
 
-function playerChoice(id) {
-  switch (id) {
-    case 'btn-rock':
-      return 'rock';
-    case 'btn-paper':
-      return 'paper';
-    default:
-      return 'scissors';
-  }
-}
-
 function computerPlay() {
-  const computerOptions = ['rock', 'paper', 'scissors'];
+  const computerOptions = ['Rock', 'Paper', 'Scissors'];
   let optionRandomizer = Math.floor(Math.random() * computerOptions.length);
   let computerResult = computerOptions[optionRandomizer];
   console.log(optionRandomizer, computerResult);
@@ -36,18 +24,19 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
   const gameContent = `${playerSelection}${computerSelection}`;
-  const optionSet = new Set(["rockscissors", "paperrock", "scissorspaper"]);
+  const optionSet = new Set(["RockScissors", "PaperRock", "ScissorsPaper"]);
   if (playerSelection === computerSelection) {
-    alert(`Tie! You both chose ${playerSelection}...`);
+    gameResult.textContent = `Tie! You both chose ${playerSelection}...`;
     pointsPlayer += 1;
     pointsComputer += 1;
   } else if (optionSet.has(gameContent)) {
-    alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+    gameResult.textContent = `You win! ${playerSelection} beats ${computerSelection}!`;
     pointsPlayer += 2;
   } else {
-    alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+    gameResult.textContent = `You lose! ${computerSelection} beats ${playerSelection}!`;
     pointsComputer += 2;
   }
+  score.textContent = `Current score: ${pointsPlayer} (You) - ${pointsComputer} (Computer)`;
 }
 
 function game() {
